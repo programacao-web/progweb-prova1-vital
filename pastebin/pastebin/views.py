@@ -2,7 +2,6 @@ from django.shortcuts import render, get_object_or_404
 from .forms import PasteForm
 from .models import Paste
 
-
 def index(request):
     fields = PasteForm()
     ctx = {'fields': fields}
@@ -15,7 +14,9 @@ def paste(request, id):
 
 
 def language_list(request, language):
-    ctx = {'pastes': []}
+    filtered_pastes = Paste.objects.filter(language = language)
+
+    ctx = {'pastes': filtered_pastes}
     return render(request, 'pastebin/paste-language.jinja2', ctx)
 
 def paste_new(request):

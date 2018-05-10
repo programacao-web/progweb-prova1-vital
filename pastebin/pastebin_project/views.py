@@ -43,13 +43,15 @@ Caso não seja, explique como consertaríamos o problema.
 (a) O que é o problema N + 1 que aparece comumente em ORMs? Todos os ORMs estão
 necessariamente sujeitos a este problema ou existem meios de contorná-los?
 
+R: O problema N+1 é quando há uma relação entre classes, primeiramente é feito a recuperação das informações da primeira classe no banco de dados, e quando é necessário pegar alguma informação de uma classe relacionada (via foreign_key), é feito mais uma nova requisição ao banco de dados.
+Todos os ORMs estão sujeitos a isso, mas há formas de contorná-los quando já se sabe previamente quais classes relacionadas vai ser necessário obter informações.
 
 
 (b) Nosso app não está vulnerável ao problema porque não utiliza de nenhuma
 chave estrangeira. Suponha que o modelo de Paste possua uma referência para
 User. Como o problema apareceria e como poderíamos contorná-lo?
 
-
+R: Quando fosse recuperado um usuário e posteriormente fosse recuperado os Pastes do usuário, ocorreria o problema. Para resolver, deveria-se usar a função selected_related
 
 ''',
     },
